@@ -11,7 +11,7 @@ var quotes = [
     "You can never run out of keys."
 ];
 
-var quotesKhalid = [
+var khalidQuote = [
     true, 
     false, 
     false, 
@@ -60,10 +60,24 @@ $("#start").on("click", function() {
     print.empty();
 
     //prints the countdown timer and provides an id for the decrement function to overwrite.
-    print.append('<h2>Time Left: <span id="clock">120</span></h2>');
+    print.append('<h2>Time Left: <span id="clock">90</span></h2>');
+
+    //this for loop will print each of the questions one by one
+    for (let i = 0; i < 10; i++) {
+
+        print.append('<p class="question">"' + quotes[i] + '"</p>');
+
+        //once the question has been appended, we append the radio buttons
+        //we are using conditionals to make sure the buttons are set with accurate IDs regarding their value.
+        if (khalidQuote[i]) {
+            print.append('<form>    <input type="radio" name="q'+i+'" value="right"> DJ Khaled    <input type="radio" name="q'+i+'" value="wrong"> US President </form>')
+        } else {
+            print.append('<form>    <input type="radio" name="q'+i+'" value="wrong"> DJ Khaled    <input type="radio" name="q'+i+'" value="right"> US President </form>')
+        }
+    }
 
     //prints the button to mark completion of the quiz
-    print.append('<button type="button" id="finish">Finished!</button>')
+    print.append('<button type="button" id="finish">Finished!</button>');
 
     //Countdown for the quiz begins
     countdown();
@@ -72,7 +86,8 @@ $("#start").on("click", function() {
 //This event is called upon clicking the finish button during the games run.
 //Stops the timer to prevent the endgame function from running a second time,
 //signals the end of the game
+//currently not working
 $("#finish").on("click", function() {
     clearInterval(intervalId);
-    endGame()
+    endGame();
 })
