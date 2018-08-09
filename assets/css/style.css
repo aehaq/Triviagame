@@ -2,3 +2,38 @@ body {
 	background-image: url("../images/background.jpg");
 	background-position: center;
 }
+
+.container {
+	background-color: white;
+	margin-top: 8vh !important;
+	margin-bottom: 8vh !important;
+}
+
+.title {
+	background-color: navy;
+	color: white;
+	padding: 20px;
+}
+
+.main {
+	color: darkred;
+	padding: 20px;
+}
+
+button {
+	background-color: darkred;
+	color: white;
+	margin: 30px;
+	padding: 5px;
+}
+
+#finish {
+	background-color: navy;
+	color: white;
+	margin: 30px;
+	padding: 5px;
+}
+
+p {
+	font-weight: bold;
+}
