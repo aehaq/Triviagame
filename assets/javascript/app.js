@@ -25,10 +25,11 @@ var khalidQuote = [
 ];
 
 
-var correct;
-var incorrect;
+var correct = 0;
+var incorrect = 0;
+var unanswered = 0;
 var intervalId;
-var timeLeft =  10;
+var timeLeft =  90;
 var print = $('.main');
 
 //This function begins the timer for the game.
@@ -49,11 +50,6 @@ function decrement() {
     }
 }
 
-//This function tells the game what to do when it ends.
-function endGame() {
-    console.log("Game over!")
-}
-
 //This event covers the start of the game, upon click of the start button.
 $("#start").on("click", function() {
     //removes button and preps area for more content
@@ -65,7 +61,7 @@ $("#start").on("click", function() {
     //this for loop will print each of the questions one by one
     for (let i = 0; i < 10; i++) {
 
-        print.append('<p class="question">"' + quotes[i] + '"</p>');
+        print.append('<hr class="my-2"><p class="question">"' + quotes[i] + '"</p>');
 
         //once the question has been appended, we append the radio buttons
         //we are using conditionals to make sure the buttons are set with accurate IDs regarding their value.
@@ -77,17 +73,43 @@ $("#start").on("click", function() {
     }
 
     //prints the button to mark completion of the quiz
-    print.append('<button type="button" id="finish">Finished!</button>');
+    print.append('<input type="submit" value="Submit Answers" id="finish">');
+
+    //This event is called upon clicking the finish button during the games run.
+    //Stops the timer to prevent the endgame function from running a second time,
+    //signals the end of the game
+    $("#finish").on("click", function() {
+        event.preventDefault()
+        console.log('This button works')
+        clearInterval(intervalId);
+        endGame();
+    })
 
     //Countdown for the quiz begins
     countdown();
 })
 
-//This event is called upon clicking the finish button during the games run.
-//Stops the timer to prevent the endgame function from running a second time,
-//signals the end of the game
-//currently not working
-$("#finish").on("click", function() {
-    clearInterval(intervalId);
-    endGame();
-})
+//This function tells the game what to do when it ends.
+function endGame() {
+
+    for (let i = 0; i < 10; i++) {
+
+        var thisResult = $('input[name="q'+i+'"]:checked').val();
+        console.log(thisResult)
+        if (thisResult === "right") {
+            correct++;
+        } else if (thisResult === "wrong") {
+            incorrect++;
+        } else {
+            unanswered++;
+        }
+    }
+
+    print.empty();
+    console.log("Correct: " + correct)
+    console.log("incorrect: " + incorrect)
+    console.log("Left Blank: " + unanswered)
+    print.append('<p> Answered Correctly: ' + correct + '</p>');
+    print.append('<p> Answered Incorrectly: ' + incorrect + '</p>');
+    print.append('<p> Left Unanswered: ' + unanswered + '</p>');
+}
