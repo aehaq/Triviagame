@@ -1,0 +1,62 @@
+HTML
+
+-one container for all the content
+    One div in this container should initially have title.
+
+    One div that will be overwritten by javascript (targetDiv)
+
+Javascript
+
+-Ready Document
+
+create object with quotes and values of true or false assigned to each quote
+create "correct" variable
+create "incorrect variable
+
+When Start button is clicked
+    Initialize game
+        clear start button
+
+        append countdown timer starting from 120 seconds counting down on the top of the page (make sure seconds input has id and is editable)
+        
+        for questions 1-10
+        
+            create div with question class and id of "q-[i]" to reference
+            append container questions [i]
+            if value of quote is true
+                print in container option 1 (with value of right)
+                print in container option 2 (with value of wrong)
+            if value of quote is false
+                print in container option 1 (with class of wrong)
+                print in container option 2 (with class of right)
+
+        append print button
+
+        Set countdown timer running
+
+create game end function
+
+    stop countdown
+    
+    for questions 1-10
+        if (correct option was selected)
+            add 1 to correct variable
+        if (incorrect option was selected)
+            add 1 t0 incorrect variable
+        if (correct option was blank and incorrect option was blank)
+            add 1 to unanswered
+    
+    clear all items from div
+
+    append "all done!" message
+
+    append correct score and text to div
+
+    append incorrect score and text to div
+
+    append unanswered score and text to div
+
+when player hits submit
+    run end game function
+
+when player runs out of time run end game function
